@@ -9,7 +9,7 @@
 body {
     font-family: "Fascinate Inline", sans-serif;
 
-    background: linear-gradient( to left, #ce33ff ,
+    background: linear-gradient( 135deg, #ce33ff ,
     #25e72d );
 
     min-height: 100dvh;
