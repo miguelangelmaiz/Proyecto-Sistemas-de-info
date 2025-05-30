@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Fascinate Inline", sans-serif;
+
+    background: linear-gradient( to left, #ce33ff 75%,
+    #25e72d 25%);
+
+    min-height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container,
+.form-container{
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+     padding: 20px;
+}
+
+.main-container{
+    background: rgba(187, 239, 255, 0.95);
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+
+.main-container{
+    text-align: center;
+}
+
+.welcome-section{
+    margin: 30px 0;    
+}
+
+.travel-icon{
+    font-size: 4em;
+    margin-bottom: 20px;
+
+}
+
+.subtitle {
+    font-size: 1.4em;
+    color: beige;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.description{
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+
+}
+
+.main-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn-main{
+    width: 100%;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #ff14c3 0%,
+    #ff2424);
+    color: white;
+    border: black;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.btn-main:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(79, 172, 254, 0.2);
+}
+
+.btn-icon{
+    font-size: 1.5em;
+}
+
+.btn-text {
+    font-size: 1.1em;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2.2em;
+    font-weight: 600;
+}
