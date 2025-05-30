@@ -108,3 +108,114 @@ h1 {
     font-size: 2.2em;
     font-weight: 600;
 }
+.screen-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  font-style: italic; /* Texto en cursiva */
+}
+
+
+/* ========================================= */
+/* PASO 9: CAMPOS DE FORMULARIO */
+/* ========================================= */
+
+/* Contenedor para cada campo */
+.input-group {
+  margin-bottom: 25px;
+}
+
+/* Etiquetas de los campos */
+label {
+  display: block;
+  margin-bottom: 12px;
+  color: #555;
+  font-weight: 500;
+  font-size: 1.1em;
+
+  /* Flexbox para alinear icono y texto */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icono en las etiquetas */
+.label-icon {
+  font-size: 1.2em;
+}
+
+/* Estilos para inputs de texto, número y select */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 18px;
+  border: 2px solid #e1e8ed; /* Borde suave */
+  border-radius: 12px;
+  font-size: 16px; /* Evita zoom en móviles */
+
+  /* Transición suave */
+  transition: all 0.3s ease;
+  background-color: #fafafa; /* Fondo muy claro */
+}
+
+/* Estado focus (cuando el usuario está escribiendo) */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none; /* Quita el outline por defecto */
+  border-color: #667eea; /* Borde del color del tema */
+  background-color: white;
+  /* Sombra sutil alrededor del campo */
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ========================================= */
+/* PASO 10: BOTONES */
+/* ========================================= */
+
+/* Botón principal (continuar, completar) */
+.btn-primary {
+  width: 100%;
+  padding: 18px;
+  /* Gradiente morado elegante */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+/* Efecto hover para botón principal */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.screen {
+  display: none;
+  /* Animación suave al aparecer */
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Solo la pantalla con clase 'active' se muestra */
+.screen.active {
+  display: block;
+}
+
+/* Animación de entrada para las pantallas */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Comienza invisible */
+    transform: translateY(20px); /* Comienza 20px abajo */
+  }
+  to {
+    opacity: 1; /* Termina visible */
+    transform: translateY(0); /* Termina en su posición */
+  }
+}
