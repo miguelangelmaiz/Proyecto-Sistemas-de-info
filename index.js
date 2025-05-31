@@ -220,14 +220,15 @@ function finalizarQuiz() {
 function mostrarResumenQuiz() {
   const resumenDiv = document.getElementById("quiz-summary");
   resumenDiv.innerHTML = "<h3>Resumen de tus respuestas:</h3>";
-  preguntas.forEach((q, idx) => {
+  preguntasSeleccionadas.forEach((q, idx) => {
     const seleccion = respuestasUsuario[idx];
     const correcta = q.respuesta;
+    let color = seleccion === correcta ? 'green' : 'red';
     resumenDiv.innerHTML += `
       <div class="resumen-pregunta">
         <strong>${idx + 1}. ${q.pregunta}</strong><br>
-        Tu respuesta: <span${seleccion === correcta ? ' style="color:green;"' : ' style="color:red;"'}>${q.opciones[seleccion] ?? 'No respondida'}</span><br>
-        Respuesta correcta: <span style="color:green;">${q.opciones[correcta]}</span>
+        Tu respuesta: <span style="color:${color};">${seleccion !== null && seleccion !== undefined ? q.opciones[seleccion] : 'No respondida'}</span><br>
+        ${seleccion === correcta ? '<span style="color:green;">¡Correcto!</span>' : `<span style="color:red;">Incorrecto</span>. Respuesta correcta: <span style="color:green;">${q.opciones[correcta]}</span>`}
       </div>
       <hr>
     `;
@@ -252,18 +253,26 @@ function iniciarQuiz() {
 // Función para iniciar el temporizador
 function iniciarTemporizador() {
   let tiempoRestante = tiempoLimite;
-  const tiempoDisplay = document.getElementById("timer"); // Asegúrate de tener un elemento con este ID en tu HTML
+  const tiempoDisplay = document.getElementById("timer");
   timer = setInterval(() => {
-      tiempoRestante -= 1000; // Reducir 1 segundo
+      tiempoRestante -= 1000;
       const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
       const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
-      tiempoDisplay.textContent = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`; // Mostrar tiempo
+      tiempoDisplay.textContent = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
       if (tiempoRestante <= 0) {
           clearInterval(timer);
-          alert("¡Se acabó el tiempo!"); // Mensaje de tiempo agotado
-          finalizarQuiz(); // Finalizar el quiz
+          mostrarAlertaTiempo();
       }
   }, 1000);
+}
+// Nueva función para mostrar la alerta y redirigir
+function mostrarAlertaTiempo() {
+  const alerta = document.getElementById("timeout-alert");
+  alerta.style.display = "block";
+  setTimeout(() => {
+    alerta.style.display = "none";
+    showScreen("main-screen");
+  }, 4000); // 4 segundos
 }
 // Llama a iniciarQuiz cuando el usuario termina el registro
 forms.usernameForm.addEventListener("submit", function (event) {
