@@ -41,7 +41,7 @@
               <span class="btn-text">Personas con sus records </span>
             </button>
           </div>
-          <div id="username-screen" class="">
+          <div id="username-screen" class="screen">
         <div class="form-container">
           
 
@@ -75,6 +75,48 @@
           </form>
         </div>
       </div>
+
+</form>
+</div>
+</div>
+
+<!-- Sección de preguntas tipo quiz -->
+<div id="quiz-screen" class="screen" style="display:none;">
+  <div class="quiz-container">
+    <h1>📝 Pregunta <span id="quiz-number">1</span></h1>
+    <p class="quiz-question" id="quiz-question-text"></p>
+    <div class="quiz-options">
+      <button class="quiz-option" data-index="0"></button>
+      <button class="quiz-option" data-index="1"></button>
+      <button class="quiz-option" data-index="2"></button>
+      <button class="quiz-option" data-index="3"></button>
+    </div>
+    <button class="btn-primary" id="next-question-btn">Siguiente ➡️</button>
+  </div>
+</div>
+  <div id="result-screen" class="screen">
+        <div class="Ha completado el quizr">
+          <!-- Título de éxito -->
+          <h1>🎉 ¡Ha  Completado el quiz !</h1>
+
+          <!-- Icono de éxito animado -->
+          <div class="success-icon">✅</div>
+
+          <!-- Mensaje de confirmación -->
+          <p class="resultado-text">
+            quiz a sido completado con éxito. ¡Gracias por participar!
+          </p>
+
+          <!-- Contenedor para el resumen del viaje (se llena con JavaScript) -->
+          <div id="quiz-summary"></div>
+
+          <!-- Botón para volver al menú principal -->
+          <button class="btn-primary" id="back-to-main-btn">
+            🏠 Volver al Inicio
+          </button>
+        </div>
+      </div>
+<!-- ...existing code... -->
         </div>
       </div>
 

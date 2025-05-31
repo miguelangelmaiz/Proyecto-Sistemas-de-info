@@ -204,7 +204,6 @@ select:focus {
 .screen {
   display: none;
   /* Animación suave al aparecer */
-  animation: fadeIn 0.5s ease-in;
 }
 
 /* Solo la pantalla con clase 'active' se muestra */
@@ -212,14 +211,4 @@ select:focus {
   display: block;
 }
 
-/* Animación de entrada para las pantallas */
-@keyframes fadeIn {
-  from {
-    opacity: 0; /* Comienza invisible */
-    transform: translateY(20px); /* Comienza 20px abajo */
-  }
-  to {
-    opacity: 1; /* Termina visible */
-    transform: translateY(0); /* Termina en su posición */
-  }
-}
+
