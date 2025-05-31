@@ -71,28 +71,98 @@ document.addEventListener("DOMContentLoaded", () => {
 // Diccionario de preguntas
 const preguntas = [
   {
-    pregunta: "¿Cuál es la capital de Francia?",
-    opciones: ["Madrid", "París", "Roma", "Berlín"],
+    pregunta: "¿Quién es el capitán de los Piratas de Sombrero de Paja?",
+    opciones: ["zoro", "Sanji", "Luffy", "Nami"],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Qué fruta del diablo comió Luffy?",
+    opciones: ["hito hito nika", "gomu gomu no mi", "mera mera no mi", "ope ope no mi"],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cual es la especialidad magica de frieren?",
+    opciones: ["Magie fuego", "Magia hielo", "Magia flores", "Magia ilusion"],
+    respuesta: 3
+  },
+  {
+    pregunta: "¿Cual es el aprendiz de frieren?",
+    opciones: ["Stark", "Fern", "Heiter", "himmel"],
     respuesta: 1
   },
   {
-    pregunta: "¿Cuál es el planeta más grande del sistema solar?",
-    opciones: ["Marte", "Júpiter", "Saturno", "Venus"],
+    pregunta: "¿Cual es el demonio que trae denji?",
+    opciones: ["Infierno", "Pochita", "Control", "Makima"],
     respuesta: 1
   },
   {
-    pregunta: "¿Quién escribió 'Cien años de soledad'?",
-    opciones: ["Pablo Neruda", "Gabriel García Márquez", "Mario Vargas Llosa", "Julio Cortázar"],
+    pregunta: "¿Que quiere conseguir denji como su mayor deseo al inicio de la historia?",
+    opciones: ["Venganza", "Poder ilimitado", "Tostada con mermelada", "Tetas"],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cual es el nombre del zanpakuto de byakuya?",
+    opciones: ["Senbonzakura", "Hyorinmaru", "Zabimaru", "Kyoka Suigetsu"],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cual es la tecnica unica del clan de Itachi uchiha?",
+    opciones: ["tsukuyomi", "Susanoo", "Amaterasu", "Kamui"],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cual es el nombre de la habilidad de subaru que permite volver despues de morir?",
+    opciones: ["Return by Death", "Rewind Time", "Death Loop", "Checkpoint"],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cual es el verdadero nombre de archer en Fate/stay?",
+    opciones: ["Gilgamesh", "Kotomine", "Artoria pendragon", "Emiya shirou"],
+    respuesta: 3
+  },
+  {
+    pregunta: "¿Cual es la tecnica de magia que aprende rudeus de Rosy?",
+    opciones: ["Fireball", "Heal", "Teleport", "Quagmire"],
+    respuesta: 3
+  },
+  {
+    pregunta: "¿Quien fue la primera esposa de Rudeus?",
+    opciones: ["Ninguna", "Eris", "Roxy", "Silphy"],
+    respuesta: 3
+  },
+  {
+    pregunta: "¿Cual es el titan que contiene Eren Yeager al inicio?",
+    opciones: ["Ataque", "Acorazado", "Hembra", "Colozal"],
+    respuesta: 0
+  },
+  {
+    pregunta: "¿Cual es la tecnica maldita de Megumi Fushiguro?",
+    opciones: ["Limite infinito", "Manipulcion de Sangre", "Diez Sombras", "Black Bird"],
+    respuesta: 2
+  },
+  {
+    pregunta: "¿Cual es el nombre del sistemas de Jin-Woo?",
+    opciones: ["Juego de Muerte", "El sistema", "El monarca", "El Diosss"],
     respuesta: 1
-  }
+  },
 ];
 
+// Función para mezclar el array de preguntas
+function mezclarPreguntas(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 let preguntaActual = 0;
 let score = 0;
+let timer; // Temporizador
+const tiempoLimite = 5 * 60 * 1000; // 5 minutos en ms
+let preguntasSeleccionadas = [];
 
 // Mostrar pregunta en el formulario
 function mostrarPregunta() {
-  const q = preguntas[preguntaActual];
+  const q = preguntasSeleccionadas[preguntaActual]; // Usar preguntasSeleccionadas
   document.getElementById("quiz-number").textContent = preguntaActual + 1;
   document.getElementById("quiz-question-text").textContent = q.pregunta;
   q.opciones.forEach((op, idx) => {
@@ -105,23 +175,47 @@ function mostrarPregunta() {
 // Manejar envío del formulario de quiz
 forms.quizForm.addEventListener("submit", function(event) {
   event.preventDefault();
-  // Obtener opción seleccionada
-  const seleccionada = parseInt(document.querySelector('input[name="quiz-option"]:checked').value);
-  if (seleccionada === preguntas[preguntaActual].respuesta) {
-    score++;
+  const seleccionadaInput = document.querySelector('input[name="quiz-option"]:checked');
+  let seleccionada = null;
+  if (seleccionadaInput) {
+    seleccionada = parseInt(seleccionadaInput.value);
+  }
+  respuestasUsuario[preguntaActual] = seleccionada; // Guardar respuesta (o null si no respondió)
+  
+  if (seleccionada === preguntasSeleccionadas[preguntaActual].respuesta) {
+      score++;
   }
   preguntaActual++;
-  if (preguntaActual < preguntas.length) {
-  mostrarPregunta();
-} else {
-  user.score = score;
-  showScreen("result-screen");
-  // Mostrar el score en la pantalla de resultados
-  document.getElementById("score-text").textContent =
-    `Tu puntaje final es: ${score} de ${preguntas.length}`;
-    mostrarResumenQuiz();
-}
+  if (preguntaActual < preguntasSeleccionadas.length) {
+      mostrarPregunta();
+  } else {
+      finalizarQuiz();
+  }
 });
+function finalizarQuiz() {
+  clearInterval(timer);
+  // Completar respuestas faltantes como incorrectas (null)
+  for (let i = respuestasUsuario.length; i < preguntasSeleccionadas.length; i++) {
+      respuestasUsuario[i] = null; 
+  }
+  // Recalcular score por si hubo preguntas sin responder contabilizadas
+  score = 0;
+  for (let i = 0; i < preguntasSeleccionadas.length; i++) {
+      if (respuestasUsuario[i] === preguntasSeleccionadas[i].respuesta) {
+          score++;
+      }
+  }
+  user.score = score;
+  // Redirigir a la pantalla principal si el tiempo se acabó
+  if (score === 0) { // Si no hay respuestas correctas, redirigir a la pantalla principal
+      showScreen("main-screen");
+  } else {
+      showScreen("result-screen");
+      document.getElementById("score-text").textContent =
+          `Tu puntaje final es: ${score} de ${preguntasSeleccionadas.length}`;
+      mostrarResumenQuiz();
+  }
+}
 // Mostrar resumen del quiz
 function mostrarResumenQuiz() {
   const resumenDiv = document.getElementById("quiz-summary");
@@ -147,9 +241,30 @@ function iniciarQuiz() {
   score = 0;
   respuestasUsuario = [];
   document.getElementById("quiz-summary").innerHTML = "";
+  
+  // Mezclar preguntas y seleccionar las primeras 10
+  mezclarPreguntas(preguntas);
+  preguntasSeleccionadas = preguntas.slice(0, 10); // Seleccionar solo las primeras 10 preguntas
+  
   mostrarPregunta();
+  iniciarTemporizador(); // Iniciar el temporizador
 }
-
+// Función para iniciar el temporizador
+function iniciarTemporizador() {
+  let tiempoRestante = tiempoLimite;
+  const tiempoDisplay = document.getElementById("timer"); // Asegúrate de tener un elemento con este ID en tu HTML
+  timer = setInterval(() => {
+      tiempoRestante -= 1000; // Reducir 1 segundo
+      const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+      tiempoDisplay.textContent = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`; // Mostrar tiempo
+      if (tiempoRestante <= 0) {
+          clearInterval(timer);
+          alert("¡Se acabó el tiempo!"); // Mensaje de tiempo agotado
+          finalizarQuiz(); // Finalizar el quiz
+      }
+  }, 1000);
+}
 // Llama a iniciarQuiz cuando el usuario termina el registro
 forms.usernameForm.addEventListener("submit", function (event) {
   event.preventDefault();
