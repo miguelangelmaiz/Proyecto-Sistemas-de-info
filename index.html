@@ -6,6 +6,9 @@
     <title>QUIZ EN 5 Min</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
+<div id="timeout-alert" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%); background:#fff; border:2px solid #f00; padding:30px; z-index:9999; font-size:1.2em; text-align:center;">
+  ⏰ ¡Se acabó el tiempo! Serás redirigido al inicio...
+</div>
 <body>
         <div class="container">
       <!-- PASO 4: PANTALLA PRINCIPAL  -->
@@ -41,8 +44,128 @@
               <span class="btn-text">Personas con sus records </span>
             </button>
           </div>
+          
+
+</form>
+</div>
+
+      </div>
+      <div id="username-screen" class="screen">
+        <div class="form-container">
+          
+
+          <!-- Título con emoji relacionado -->
+          <h1>🆔 Tu Nombre de Usuario</h1>
+
+          <!-- Subtítulo explicativo -->
+          <p class="screen-subtitle">
+            ¿Cómo quieres que te identifiquemos en tu quiz?
+          </p>
+
+          <!-- Formulario para capturar el username -->
+          <form id="username-form">
+            <div class="input-group">
+              <!-- Label con icono y texto descriptivo -->
+              <label for="username">
+                <span class="label-icon">👤</span>
+                Nombre de Usuario:
+              </label>
+              <!-- Input con placeholder ejemplo -->
+              <input
+                type="text"
+                id="username"
+                placeholder="Ej: Miguel :"
+                required
+              />
+            </div>
+
+            <!-- Botón para continuar al siguiente paso -->
+            <button type="submit" class="btn-primary">Continuar ➡️</button>
+          </form>
+        </div>
+</div>
+
+<!-- Sección de preguntas tipo quiz -->
+<div id="quiz-screen" class="screen">
+  <div class="quiz-container">
+    <h1>📝 Pregunta <span id="quiz-number">1</span></h1>
+    <form id="quiz-form">
+      <p class="quiz-question" id="quiz-question-text"></p>
+      <div class="quiz-options">
+        <label>
+          <input type="radio" name="quiz-option" value="0" required />
+          <span id="option-0"></span>
+        </label><br>
+        <label>
+          <input type="radio" name="quiz-option" value="1" required />
+          <span id="option-1"></span>
+        </label><br>
+        <label>
+          <input type="radio" name="quiz-option" value="2" required />
+          <span id="option-2"></span>
+        </label><br>
+        <label>
+          <input type="radio" name="quiz-option" value="3" required />
+          <span id="option-3"></span>
+        </label>
+      </div>
+      <button type="submit" class="btn-primary" id="next-question-btn">Siguiente ➡️</button>
+    </form>
+  </div>
+</div>
+  
+
+<div id="result-screen" class="screen">
+        <div class="Ha completado el quizr">
+          <!-- Título de éxito -->
+          <h1>🎉 ¡Ha  Completado el quiz !</h1>
+
+          <!-- Icono de éxito animado -->
+          <div class="success-icon">✅</div>
+
+          <!-- Mensaje de confirmación -->
+          <p class="resultado-text">
+            quiz a sido completado con éxito. ¡Gracias por participar!
+          </p>
+          <p class="resultado-text">
+  quiz a sido completado con éxito. ¡Gracias por participar!
+</p>
+<p id="score-text"></p>
+
+          <!-- Contenedor para el resumen del quiz ( si es que lo quieres hacer ) -->
+          <div id="quiz-summary"></div>
+
+          <!-- Botón para volver al menú principal -->
+          <button class="btn-primary" id="back-to-main-btn">
+            🏠 Volver al Inicio
+          </button>
         </div>
       </div>
+      <div id="timer">5:00</div>
+
+      <div id="users-list" class="screen">
+        <div class="list-container">
+          <!-- Título de la lista -->
+          <h1>👥 Usuarios  Registrados</h1>
+
+          <!-- Subtítulo motivacional -->
+          <p class="list-subtitle">🌟 Conoce a otros usuarios que hicieron el quiz de anime como tú</p>
+
+          <!-- Contenedor donde se mostrarán las tarjetas de usuarios (llenado por JavaScript) -->
+          <div id="users-content"></div>
+
+          <!-- Botón para regresar al menú principal -->
+          <button class="btn-primary" id="back-to-main-btn-users">🏠 Volver al Inicio</button>
+        </div>
+      </div>
+
+        </div>
+      </div>
+
+      
+    </div>
+
+
 
 
 

@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Fascinate Inline", sans-serif;
+
+    background: linear-gradient( 135deg, #ce33ff ,
+    #25e72d );
+
+    min-height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container,
+.form-container{
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+     padding: 20px;
+}
+
+.main-container{
+    background: rgba(187, 239, 255, 0.95);
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+
+.main-container{
+    text-align: center;
+}
+
+.welcome-section{
+    margin: 30px 0;    
+}
+
+.travel-icon{
+    font-size: 4em;
+    margin-bottom: 20px;
+
+}
+
+.subtitle {
+    font-size: 1.4em;
+    color: beige;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.description{
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+
+}
+
+.main-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn-main{
+    width: 100%;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #ff14c3 0%,
+    #ff2424);
+    color: white;
+    border: black;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+.btn-main:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(79, 172, 254, 0.2);
+}
+
+.btn-icon{
+    font-size: 1.5em;
+}
+
+.btn-text {
+    font-size: 1.1em;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2.2em;
+    font-weight: 600;
+}
+.screen-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  font-style: italic; /* Texto en cursiva */
+}
+
+
+/* ========================================= */
+/* PASO 9: CAMPOS DE FORMULARIO */
+/* ========================================= */
+
+/* Contenedor para cada campo */
+.input-group {
+  margin-bottom: 25px;
+}
+
+/* Etiquetas de los campos */
+label {
+  display: block;
+  margin-bottom: 12px;
+  color: #555;
+  font-weight: 500;
+  font-size: 1.1em;
+
+  /* Flexbox para alinear icono y texto */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icono en las etiquetas */
+.label-icon {
+  font-size: 1.2em;
+}
+
+/* Estilos para inputs de texto, número y select */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 18px;
+  border: 2px solid #e1e8ed; /* Borde suave */
+  border-radius: 12px;
+  font-size: 16px; /* Evita zoom en móviles */
+
+  /* Transición suave */
+  transition: all 0.3s ease;
+  background-color: #fafafa; /* Fondo muy claro */
+}
+
+/* Estado focus (cuando el usuario está escribiendo) */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none; /* Quita el outline por defecto */
+  border-color: #667eea; /* Borde del color del tema */
+  background-color: white;
+  /* Sombra sutil alrededor del campo */
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ========================================= */
+/* PASO 10: BOTONES */
+/* ========================================= */
+
+/* Botón principal (continuar, completar) */
+.btn-primary {
+  width: 100%;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #ff14c3 0%,
+    #ff2424);
+    color: white;
+    border: black;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+}
+
+/* Efecto hover para botón principal */
+.btn-primary:hover {
+  transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(79, 172, 254, 0.2);
+}
+
+.screen {
+  display: none;
+  /* Animación suave al aparecer */
+}
+
+/* Solo la pantalla con clase 'active' se muestra */
+.screen.active {
+  display: block;
+}
+.list-container {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Centrar y espaciar las tarjetas de usuario */
+#users-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 30px 0;
+  width: 100%;
+}
+
+/* Tarjeta de usuario */
+.user-card {
+  background: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 24px 32px;
+  min-width: 220px;
+  text-align: center;
+  font-family: inherit;
+}
+
+
