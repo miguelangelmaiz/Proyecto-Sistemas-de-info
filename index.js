@@ -1,4 +1,5 @@
 let respuestasUsuario = [];
+let tiempoInicio = 0;
 
 let user = {
     username: "",
@@ -213,6 +214,10 @@ function finalizarQuiz() {
       }
   }
   user.score = score;
+  const tiempoFin = Date.now();
+  const tiempoUsadoMs = tiempoFin - tiempoInicio;
+  user.time = Math.floor(tiempoUsadoMs / 1000); // tiempo en segundos
+
   // Redirigir a la pantalla principal si el tiempo se acabó
   if (score === 0) { // Si no hay respuestas correctas, redirigir a la pantalla principal
       showScreen("main-screen");
@@ -245,6 +250,7 @@ function mostrarResumenQuiz() {
 // aqui 
 function gotToUserList() {
   displayUsers();
+  document.getElementById("timer").style.display = "none"; // Oculta el cronómetro
   showScreen("userList");
 }
 // hasta aca 
@@ -262,6 +268,8 @@ function iniciarQuiz() {
   preguntasSeleccionadas = preguntas.slice(0, 10); // Seleccionar solo las primeras 10 preguntas
   
   mostrarPregunta();
+  tiempoInicio = Date.now(); // <-- Guarda el tiempo de inicio
+  document.getElementById("timer").style.display = "block"; // Muestra el cronómetro
   iniciarTemporizador(); // Iniciar el temporizador
 }
 // Función para iniciar el temporizador
@@ -326,7 +334,7 @@ function saveUser(userData) {
 }
 
 function getUsers() {
-    const users = localStorage.getItem("travelUser ");
+    const users = localStorage.getItem("travelUser");
     return JSON.parse(users) || [];
 }
 
