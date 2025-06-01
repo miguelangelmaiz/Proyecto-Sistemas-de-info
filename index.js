@@ -303,16 +303,22 @@ forms.usernameForm.addEventListener("submit", function (event) {
 function saveUser(userData) {
   let users = getUsers();
 
-  //Verigicar si el usuario existe
-
-  const existingUserIndex = users.findIndex(
-    (user) => user.username === userData.username
-  );
-
+    // Verificar si el usuario existe
+    const existingUserIndex = users.findIndex(
+      (user) => user.username === userData.username
+);
   if (existingUserIndex !== -1) {
-    users[existingUserIndex] = userData; // Actualizar el usuario existente
+      users[existingUserIndex] = {
+          username: userData.username,
+          score: userData.score,
+          time: userData.time
+      }; // Actualizar el usuario existente
   } else {
-    users.push(userData);
+      users.push({
+          username: userData.username,
+          score: userData.score,
+          time: userData.time
+      });
   }
 
   localStorage.setItem("travelUser", JSON.stringify(users));
@@ -320,36 +326,28 @@ function saveUser(userData) {
 }
 
 function getUsers() {
-  const users = localStorage.getItem("travelUser");
-
-  return JSON.parse(users) || [];
+    const users = localStorage.getItem("travelUser ");
+    return JSON.parse(users) || [];
 }
 
 function displayUsers() {
-  const users = getUsers();
-  [{}, {}];
-
+    const users = getUsers();
   const userContent = document.getElementById("users-content");
   if (users.length === 0) {
-    userContent.innerHTML = "<p>No hay usuarios registrados.</p>";
+      userContent.innerHTML = "<p>No hay usuarios registrados.</p>";
   } else {
-    userContent.innerHTML = ""; // Limpiar el contenido anterior
-    users.forEach((user) => {
-      const userItem = document.createElement("div");
-      userItem.innerHTML = `
-      <div class="user-card">
-                    <h3> ${user.fullname} (@${user.username})</h3>
-                    <p><strong>📅 Fecha de registro:</strong> ${user.registrationDate}</p>
-                    <div class="trip-info">
-                        <p><strong>📍 Destino:</strong> <span> ${user.destination}</span></p>
-                        <p><strong>🏨 Habitaciones:</strong> <span>${user.rooms}</span></p>
-                        <p><strong>⏰ Duración:</strong> <span>${user.days} días</span></p>
-                        <p><strong>🎉 Estado:</strong> <span>¡Listo para la aventura!</span></p>
-                    </div>
-                </div>
-      `;
-      userContent.appendChild(userItem);
-    });
+      userContent.innerHTML = ""; // Limpiar el contenido anterior
+      users.forEach((user) => {
+          const userItem = document.createElement("div");
+          userItem.innerHTML = `
+              <div class="user-card">
+                  <h3>${user.username}</h3>
+                  <p><strong>Puntaje:</strong> ${user.score}</p>
+                  <p><strong>Tiempo:</strong> ${user.time} segundos</p>
+              </div>
+          `;
+          userContent.appendChild(userItem);
+      });
   }
 }
 // aca 
