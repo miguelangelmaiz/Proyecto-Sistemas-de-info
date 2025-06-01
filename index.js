@@ -11,6 +11,7 @@ const screens = {
     "username-screen": document.getElementById("username-screen"),
     "quiz-screen": document.getElementById("quiz-screen"),
     "result-screen": document.getElementById("result-screen"),
+    userList: document.getElementById("users-list"),
 };
 
 const forms = {
@@ -28,6 +29,7 @@ const buttons = {
     viewUsers: document.getElementById("view-users-btn"),
     nextQuestionBtn: document.getElementById("next-question-btn"),
     backToMainBtn: document.getElementById("back-to-main-btn"),
+    
 };
 buttons.backToMainBtn.addEventListener("click", function() {
     showScreen("main-screen");
@@ -45,7 +47,9 @@ function handleSubmitUsername(event) {
   user.username= username;
   showScreen("quiz-screen");
 }
-
+document.getElementById("back-to-main-btn-users").addEventListener("click", function() {
+    showScreen("main-screen");
+});
 
 
 function startNewRegistration() {
@@ -63,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mostrar pantalla de registro al hacer click en "Nuevo Registro"
     buttons.newRegistration.addEventListener("click", startNewRegistration);
+    buttons.viewUsers.addEventListener("click", gotToUserList);
+    
 
     // Capturar el submit del formulario de username
     
@@ -154,6 +160,7 @@ function mezclarPreguntas(array) {
       [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
 let preguntaActual = 0;
 let score = 0;
 let timer; // Temporizador
@@ -213,6 +220,7 @@ function finalizarQuiz() {
       showScreen("result-screen");
       document.getElementById("score-text").textContent =
           `Tu puntaje final es: ${score} de ${preguntasSeleccionadas.length}`;
+      saveUser(user); // aqui agregue 
       mostrarResumenQuiz();
   }
 }
@@ -234,6 +242,12 @@ function mostrarResumenQuiz() {
     `;
   });
 }
+// aqui 
+function gotToUserList() {
+  displayUsers();
+  showScreen("userList");
+}
+// hasta aca 
 
 
 // Mostrar la primera pregunta al entrar al quiz
@@ -281,6 +295,71 @@ forms.usernameForm.addEventListener("submit", function (event) {
   showScreen("quiz-screen");
   iniciarQuiz();
 });
+
+
+
+// desde aqui hasta aca 
+
+function saveUser(userData) {
+  let users = getUsers();
+
+  //Verigicar si el usuario existe
+
+  const existingUserIndex = users.findIndex(
+    (user) => user.username === userData.username
+  );
+
+  if (existingUserIndex !== -1) {
+    users[existingUserIndex] = userData; // Actualizar el usuario existente
+  } else {
+    users.push(userData);
+  }
+
+  localStorage.setItem("travelUser", JSON.stringify(users));
+  return userData;
+}
+
+function getUsers() {
+  const users = localStorage.getItem("travelUser");
+
+  return JSON.parse(users) || [];
+}
+
+function displayUsers() {
+  const users = getUsers();
+  [{}, {}];
+
+  const userContent = document.getElementById("users-content");
+  if (users.length === 0) {
+    userContent.innerHTML = "<p>No hay usuarios registrados.</p>";
+  } else {
+    userContent.innerHTML = ""; // Limpiar el contenido anterior
+    users.forEach((user) => {
+      const userItem = document.createElement("div");
+      userItem.innerHTML = `
+      <div class="user-card">
+                    <h3> ${user.fullname} (@${user.username})</h3>
+                    <p><strong>📅 Fecha de registro:</strong> ${user.registrationDate}</p>
+                    <div class="trip-info">
+                        <p><strong>📍 Destino:</strong> <span> ${user.destination}</span></p>
+                        <p><strong>🏨 Habitaciones:</strong> <span>${user.rooms}</span></p>
+                        <p><strong>⏰ Duración:</strong> <span>${user.days} días</span></p>
+                        <p><strong>🎉 Estado:</strong> <span>¡Listo para la aventura!</span></p>
+                    </div>
+                </div>
+      `;
+      userContent.appendChild(userItem);
+    });
+  }
+}
+// aca 
+
+
+
+
+
+
+
 
 
 
