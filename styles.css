@@ -241,5 +241,32 @@ select:focus {
   text-align: center;
   font-family: inherit;
 }
+@media (max-width: 600px) {
+  .list-container {
+    max-width: 98vw;
+    padding: 0 5px;
+  }
+  #users-content {
+    flex-direction: column;
+    gap: 16px;
+    margin: 15px 0;
+    width: 100%;
+    align-items: center;
+  }
+  .user-card {
+    min-width: 0;
+    width: 95vw;
+    padding: 16px 8px;
+    font-size: 1em;
+  }
+  .btn-primary {
+    width: 100%;
+    font-size: 1em;
+    padding: 18px 10px;
+  }
+  h1, .list-subtitle {
+    font-size: 1.2em;
+  }
+}
 
 
